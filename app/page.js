@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Card from "./components/Card"
 
+import { useEffect, useState } from "react";
+import Card from "@/app/components/Card"
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
@@ -17,7 +17,7 @@ export default function Home() {
     async function fetchPokemon() {
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=1000"
+          `https://pokeapi.co/api/v2/pokemon?limit=1000`
         );
 
         if (!response.ok) {
