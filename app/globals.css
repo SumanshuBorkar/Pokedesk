@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+/* Pokeball css - From https://codepen.io/marabesi/pen/ENxeGg */
+
+.pokemon-card {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 20px solid #000;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+
+.pokemon-card .red {
+  width: 100%;
+  height: 50%;
+  background-color: #ff1227;
+  border-bottom: 20px solid #000;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.pokemon-card .white {
+  width: 100%;
+  height: 50%;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.pokemon-card .inside {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 18px solid #000;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pokémon image */
+.pokemon-card .pokemon-image {
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+  position: absolute;
+  z-index: 10;
+
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+
+  transition: transform 0.3s ease;
+}
+
+
+
+.pokemon-card .pokemon-name {
+  position: relative;
+  z-index: 10;
+
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #111;
+
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .pokemon-card {
+    width: 240px;
+    height: 240px;
+    border-width: 16px;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .pokemon-card .red {
+    border-bottom-width: 16px;
+  }
+
+  .pokemon-card .inside {
+    width: 75px;
+    height: 75px;
+    border-width: 15px;
+  }
+
+  .pokemon-card .pokemon-image {
+    width: 105px;
+    height: 105px;
+  }
+
+  .pokemon-card .white {
+    padding-bottom: 25px;
+  }
+
+  .pokemon-card .pokemon-name {
+    font-size: 1.1rem;
+  }
 }

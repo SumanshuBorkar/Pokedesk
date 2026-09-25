@@ -22,7 +22,7 @@ export default function Home() {
         const data = await response.json();
 
         const pokemonData = data.results.map((item, index) => ({
-          id: "ind" + index,
+          id: index + 1,
           name: item.name,
           url: item.url,
         }));
@@ -41,43 +41,46 @@ export default function Home() {
   );
 
   return (
-    <main className="w-[100vw] h-[100vh] bg-white">
-      <section className="w-[100%] h-[20%]  bg-red-500">
-        <img className="w-[20%]" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail"/>
-
-        <p className="mt-3 text-blue-100">
-          Explore Pokémon, their abilities, stats, types and moves.
-        </p>
+    <main className="w-full h-full overflow-hidden bg-white">
+      <section className="flex w-full items-center justify-between gap-4 bg-red-500 px-4 py-3 sm:px-6 md:px-10 sticky top-0">
+        <img
+          className="h-auto w-1/4 shrink-0 sm:w-40 md:w-48"
+          src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/960px-International_Pok%C3%A9mon_logo.svg.png"
+          alt="Pokemon Logo"
+        />
 
         <input
-                    type="text"
-                    placeholder="Search Pokémon by name..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="w-[50vw] rounded-xl border border-gray-200 bg-white px-5 py-4 text-gray-800 shadow-md outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                />
-      
+          type="text"
+          placeholder="Search Pokemon by name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full max-w-md border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-800 shadow-md outline-none sm:px-5 sm:py-3 sm:text-base"
+        />
       </section>
 
-      <section>
+      <section className="w-full px-4 py-4 sm:px-6 md:px-8">
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-center text-base sm:text-lg">
+          <h3 className="text-gray-700">
+            Our Pokedesk has
+          </h3>
 
-
-
-        <div className="mb-6 flex items-center justify-between">
-
-          <p className="text-red-500">
-            {filteredPokemon.length} found
+          <p className="font-bold text-red-500">
+            found {filteredPokemon.length}
           </p>
+
+          <h3 className="text-gray-700">
+            Pokemons
+          </h3>
         </div>
 
         {filteredPokemon.length === 0 ? (
-          <div className="rounded-xl bg-white p-10 text-center shadow">
-            <p className="text-lg text-gray-500">
-              No Pokémon found.
+          <div className="mx-auto max-w-xl rounded-xl bg-white p-8 text-center shadow-md sm:p-10">
+            <p className="text-base text-gray-500 sm:text-lg">
+              No Pokemon found.
             </p>
           </div>
         ) : (
-          <div className="d-flex">
+          <div className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {filteredPokemon.map((pokemon) => (
               <Card
                 key={pokemon.id}
