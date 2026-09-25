@@ -12,6 +12,37 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  animation: shake 1.5s ease-in infinite;
+  animation-play-state: paused;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(5deg);
+  }
+  5% {
+    transform: rotate(-5deg);
+  }
+  10% {
+    transform: rotate(5deg);
+  }
+  15% {
+    transform: rotate(-5deg);
+  }
+  20% {
+    transform: rotate(5deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.pokemon-card:hover {
+    cursor: pointer;
+    animation-play-state: running;
 }
 
 
@@ -61,24 +92,32 @@
 
 /* Pokémon image */
 .pokemon-card .pokemon-image {
-  width: 125px;
-  height: 125px;
-  object-fit: contain;
+  width: 150px;
+  height: 150px;
   position: absolute;
   z-index: 10;
 
+
   top: 50%;
-  left: 30%;
+  left: 70%;
   transform: translate(-50%, -50%);
 
   transition: transform 0.3s ease;
 }
 
-
+.shine{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  background-color: white;
+  border-radius: 50% ;
+}
 
 .pokemon-card .pokemon-name {
   position: relative;
-  z-index: 10;
+  z-index: 15;
 
   margin: 0;
   font-size: 1.3rem;

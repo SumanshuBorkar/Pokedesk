@@ -8,7 +8,12 @@ export default function Home() {
   const [pokemon, setPokemon] = useState([]);
   const [search, setSearch] = useState("");
 
+  let cache = null;
+
   useEffect(() => {
+
+    if(cache) return
+
     async function fetchPokemon() {
       try {
         const response = await fetch(
@@ -27,6 +32,7 @@ export default function Home() {
           url: item.url,
         }));
 
+        cache = pokemonData
         setPokemon(pokemonData);
       } catch (error) {
         setError("Failed to load Pokemon. Please try again.");

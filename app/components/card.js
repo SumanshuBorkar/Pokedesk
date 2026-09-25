@@ -6,14 +6,18 @@ export default function Card({ pokemon }) {
   return (
     <Link href={`/pokemon/${pokemon.name}`}>
       <div className="pokemon-card">
-        
-        <div className="red"></div>
+
+        <div className="red">
+          <div className="shine"></div>
+        </div>
 
         <div className="white">
           <h3 className="pokemon-name">
             {pokemon.name}
           </h3>
         </div>
+
+
 
         <div className="inside"></div>
 
