@@ -7,12 +7,14 @@ import Card from "@/app/components/Card"
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true)
+  const [Error, setError] = useState("")
 
   let cache = null;
 
   useEffect(() => {
 
-    if(cache) return
+    if (cache) return
 
     async function fetchPokemon() {
       try {
@@ -37,17 +39,20 @@ export default function Home() {
       } catch (error) {
         setError("Failed to load Pokemon. Please try again.");
       }
+      finally {
+        setLoading(false)
+      }
     }
 
     fetchPokemon();
   }, []);
 
-  const filteredPokemon = pokemon.filter((item) =>
+  const filtered = pokemon.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <main className="w-full h-full overflow-hidden bg-white">
+    <div className="w-full h-full overflow-hidden bg-white">
       <section className="flex w-full items-center justify-between gap-4 bg-red-500 px-4 py-3 sm:px-6 md:px-10 sticky top-0">
         <img
           className="h-auto w-1/4 shrink-0 sm:w-40 md:w-48"
@@ -71,7 +76,7 @@ export default function Home() {
           </h3>
 
           <p className="font-bold text-red-500">
-            found {filteredPokemon.length}
+            found {filtered.length}
           </p>
 
           <h3 className="text-gray-700">
@@ -79,23 +84,33 @@ export default function Home() {
           </h3>
         </div>
 
-        {filteredPokemon.length === 0 ? (
-          <div className="mx-auto max-w-xl rounded-xl bg-white p-8 text-center shadow-md sm:p-10">
-            <p className="text-base text-gray-500 sm:text-lg">
-              No Pokemon found.
+        {loading && (
+          <div className="flex justify-center py-20">
+            <p className="text-lg font-semibold text-gray-600">
+              Loading Pokémon...
             </p>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {filteredPokemon.map((pokemon) => (
-              <Card
-                key={pokemon.id}
-                pokemon={pokemon}
-              />
-            ))}
-          </div>
+        )}
+
+        {!loading && !Error && (
+          filtered.length === 0 ? (
+            <div className="mx-auto max-w-xl rounded-xl bg-white p-8 text-center shadow-md sm:p-10">
+              <p className="text-base text-gray-500 sm:text-lg">
+                No Pokemon found.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {filtered.map((pokemon) => (
+                <Card
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                />
+              ))}
+            </div>
+          )
         )}
       </section>
-    </main>
+    </div>
   );
 }
