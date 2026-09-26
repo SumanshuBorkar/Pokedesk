@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Info from "@/app/components/Info";
+import Info from "../../components/Info"
 
 async function getPokemon(id) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);

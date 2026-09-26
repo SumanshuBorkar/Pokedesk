@@ -2,7 +2,7 @@
 
 
 import { useEffect, useState } from "react";
-import Card from "@/app/components/Card"
+import Card from "./components/Card"
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
